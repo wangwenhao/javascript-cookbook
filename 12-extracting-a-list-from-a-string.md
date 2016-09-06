@@ -71,19 +71,20 @@ console.log(fruits); // ['cherries', 'oranges', 'apples", "bananas"]
 ```
 `forEach()`方法在每一个数组元素上应用作为参数（回调）传入的一个方法。这个回调方法支持三个参数：数组元素的值和两个可选参数，数组元素的索引值和数组本身。
 
-
-Another simpler approach is to pass a regular expression to the split() that trims the
-
-result before it’s returned:
+另外还有一个更简单的方法来提取字符串是给`split()`方法传入一个正则表达式在结果返回之前就进行修剪：
 ``` javascript
 var fruits = listStr.split(/\s*,\s*/);
 ```
-Now the matching returned value is just the string without the surrounding white space.
+现在，符合返回条件的值就是不含有空格的字符串了。
 
-The forEach() method is also covered in Recipe 2.5. The code in this
+> `forEach()`方法会在2.5节中做更多讨论。这节中的代码通过遍历的方式修改了数组。还有另一种方式是使用`Array`中更新的`map()`，这会在2.7节中进行讨论。
 
-section mutates the array in place, which means it actually modifies
+## 补充: 使用链式编程来简化代码
 
-the array as it’s traversed. Another nondestructive approach is to use
-
-the newer map() Array method, covered in Recipe 2.7.
+这一节的样例代码是正确的，但是不是觉得有点啰嗦？我们可以用JavaScript中的方法链来压缩代码，在对象和方法支持的情况下，我们可以将一个方法调用跟在另外一个方法调用的后面。在这个例子中，我们可以把`split()`方法链在`substring()`方法的后面：
+``` javascript
+var start = sentence.indexOf(":");
+var end = sentence.indexOf(".", start+1);
+var fruits = sentence.substring(start+1, end).split(",");
+```
+代码并没有变得更精确，但是更少而且更容易读懂了。我们会在4.9节中更详细得讨论方法链。
